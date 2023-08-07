@@ -8,7 +8,7 @@
     <!-- Metas -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initials-scale=1, maximum-scale=1">
     <meta name="keywords" content="HTML5 Template Hawke Multi-Purpose themeforest">
     <meta name="description" content="Hawke - Multi-Purpose HTML5 Template">
     <meta name="author" content="">
@@ -28,10 +28,10 @@
         rel="stylesheet">
 
     <!-- Plugins -->
-    <link rel="stylesheet" href="assets/css/plugins.css">
+    <link rel="stylesheet" href="{{asset('assets/css/plugins.css')}}">
 
     <!-- Core Style Css -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 
 </head>
 
@@ -41,7 +41,7 @@
 
     <!-- ==================== Start Loading ==================== -->
 
-    <div class="loader-wrap">
+    {{-- <div class="loader-wrap">
         <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
             <path id="svg" d="M0,1005S175,995,500,995s500,5,500,5V0H0Z"></path>
         </svg>
@@ -57,7 +57,7 @@
                 <span>g</span>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <!-- ==================== End Loading ==================== -->
 
@@ -76,7 +76,7 @@
     <!-- ==================== End progress-scroll-button ==================== -->
 
 
-    <div class="bg-img noise-bg" data-background="assets/imgs/patterns/noise1.png"></div>
+    <div class="bg-img noise-bg" data-background="{{asset('assets/imgs/patterns/noise1.png')}}"></div>
 
 
     <!-- ==================== Start Navbar ==================== -->
@@ -86,7 +86,7 @@
 
             <!-- Logo -->
             <a class="logo icon-img-100" href="#">
-                <img src="assets/imgs/logo-light.png" alt="logo">
+                <img src="{{asset('assets/imgs/logo-light.png')}}" alt="logo">
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -144,20 +144,18 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-11">
                         <div class="img mb-80">
-                            <img src="assets/imgs/works/project/1.png" alt="" class="radius-5">
+                            <img src="{{ $project->image_1 }}" alt="" class="radius-5">
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
                                 <div class="cont md-mb50">
-                                    <h3 class="mb-15 fw-500">The First layer.</h3>
-                                    <p>We create everything digital, printable and analytical won’t seasons, appear days
-                                        them stars replenish divided. All second forth. Him place was seas man and
-                                        gathering creepeth called fly.</p>
+                                    <h3 class="mb-15 fw-500">{{ $project->name }}</h3>
+                                    <p>{{ $project->description }}</p>
                                     <p class="mt-15">Now there is more fashion. There is no so-called trends. Now chase
                                         after anything not necessary — nor for fashionable color nor the shape, nor for
                                         style. Think about the content that you want to invest in a created object, and
                                         only then will form. The thing is your spirit.</p>
-                                    <div class="mt-30">
+                                    {{-- <div class="mt-30">
                                         <h6 class="mb-15 line-height-28">Here choose yourself like that, without any
                                             looking back, do your personal, home, small fashion, and all will be well.
                                         </h6>
@@ -210,7 +208,7 @@
                                                 <h6 class="inline fz-18">Amazing communication.</h6>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -218,7 +216,7 @@
                                     <ul>
                                         <li class="mb-30">
                                             <span class="sub-title"><i class="far fa-calendar-alt mr-10"></i> Date :</span>
-                                            <p>6, August 2022</p>
+                                            <p>{{ $project->date_created }}</p>
                                         </li>
                                         <li class="mb-30">
                                             <span class="sub-title"><i class="fas fa-list-ul mr-10"></i> Categories :</span>
@@ -246,12 +244,12 @@
                             <div class="row md-marg">
                                 <div class="col-md-6">
                                     <div class="img sm-mb30">
-                                        <img src="assets/imgs/works/project/2.png" alt="">
+                                        <img src="{{ $project->image_1 }}" alt="">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="img">
-                                        <img src="assets/imgs/works/project/3.png" alt="">
+                                        <img src="{{ $project->image_2 }}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -266,12 +264,17 @@
                             <div class="d-flex align-items-center mt-80 pt-80 bord-thin-top">
                                 <div class="prev">
                                     <h6 class="sub-title">
-                                        <a href="#"><i class="fas fa-long-arrow-alt-left"></i> Prev Project</a>
+                                        @if(($project->id)==1)
+                                            <a href="#" disabled><i class="fas fa-long-arrow-alt-left" ></i> Prev Project</a>
+                                        @else
+                                             <a href="{{ route('project', ['id' => $project->id-1]) }}"><i class="fas fa-long-arrow-alt-left"></i> Prev Project</a>
+                                        @endif
+
                                     </h6>
                                 </div>
                                 <div class="next ml-auto">
                                     <h6 class="sub-title">
-                                        <a href="#">next Project <i class="fas fa-long-arrow-alt-right"></i></a>
+                                        <a href="{{ route('project', ['id' => $project->id+1]) }}">next Project <i class="fas fa-long-arrow-alt-right"></i></a>
                                     </h6>
                                 </div>
                             </div>
@@ -316,16 +319,16 @@
 
 
     <!-- jQuery -->
-    <script src="assets/js/jquery-3.6.0.min.js"></script>
-    <script src="assets/js/jquery-migrate-3.4.0.min.js"></script>
+    <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
+    <script src="{{asset('assets/js/jquery-migrate-3.4.0.min.js')}}"></script>
 
     <!-- plugins -->
-    <script src="assets/js/plugins.js"></script>
+    <script src="{{asset('assets/js/plugins.js')}}"></script>
 
-    <script src="assets/js/ScrollTrigger.min.js"></script>
+    <script src="{{asset('assets/js/ScrollTrigger.min.js')}}"></script>
 
     <!-- custom scripts -->
-    <script src="assets/js/scripts.js"></script>
+    <script src="{{asset('assets/js/scripts.js')}}"></script>
 
 </body>
 

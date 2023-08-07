@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ProjectController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,3 +41,5 @@ Route::get('/test5', function () {
 Route::get('/test6', function () {
     return view('portfolio.project-details');
 });
+
+Route::get('/projects/details/{id}', [ProjectController::class, 'show'])->name('project');
